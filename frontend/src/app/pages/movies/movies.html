@@ -9,7 +9,7 @@
                     <p-button (click)="movieUpdateClick(null)" label="Add New" [outlined]="false" size="small"
                         icon="pi pi-plus" (click)="dt1.clear" />
                     <p-button label="Clear" [outlined]="true" size="small" icon="pi pi-filter-slash"
-                        (click)="dt1.clear" />
+                        (click)="clearFilters()" />
                 </div>
                 <p-iconfield iconPosition="left" class="ml-auto">
                     <p-inputicon>
@@ -56,7 +56,7 @@
                     </div>
                 </th>
                 <th pSortableColumn="durationNumber">Duration <p-sortIcon field="durationNumber" /></th>
-                <th>Release Date<p-columnFilter type="date" field="releasedate" display="menu" /></th>
+                <th>Release Date<p-columnFilter type="date" field="releseDateObj" display="menu" /></th>
             </tr>
         </ng-template>
 

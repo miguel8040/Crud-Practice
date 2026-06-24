@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
 import { DirectorService } from '../../services/director.service';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -41,6 +41,12 @@ export default class Directors {
 
   constructor() { }
 
+  @ViewChild('dt1') dt1?: Table;
+  clearFilters() {
+    if (!this.dt1) return;
+    this.dt1.clear();
+    this.nationalitySelection = [];
+  }
 
   formVisible: boolean = false;
   directorToUpdate: CT_Director | null = null;

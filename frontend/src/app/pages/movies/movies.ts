@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { CT_movie, DTO_Movie } from '../../models/CT_Movie.class';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SkeletonModule } from 'primeng/skeleton';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { MovieForm } from '../../shared/movie-form/movie-form';
 
 @Component({
@@ -36,6 +36,14 @@ export default class Movies {
   movieServ = inject(MovieService);
   genderSelection: string[] = [];
   directorsSelection: string[] = [];
+
+  @ViewChild('dt1') dt1?: Table;
+  clearFilters() {
+    if (!this.dt1) return;
+    this.dt1.clear();
+    this.directorsSelection = [];
+    this.genderSelection = [];
+  }
 
   constructor() { }
 

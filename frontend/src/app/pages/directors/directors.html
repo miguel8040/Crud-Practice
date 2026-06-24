@@ -10,7 +10,7 @@
                     <p-button (click)="directorUpdateClick(null)" label="Add New" [outlined]="false" size="small"
                         icon="pi pi-plus" (click)="dt1.clear" />
                     <p-button label="Clear" [outlined]="true" size="small" icon="pi pi-filter-slash"
-                        (click)="dt1.clear" />
+                        (click)="clearFilters()" />
                 </div>
                 <p-iconfield iconPosition="left" class="ml-auto">
                     <p-inputicon>
@@ -44,7 +44,7 @@
                         </p-columnFilter>
                     </div>
                 </th>
-                <th pSortableColumn="code">Age <p-sortIcon field="age" /></th>
+                <th pSortableColumn="age">Age <p-sortIcon field="age" /></th>
             </tr>
         </ng-template>
 
