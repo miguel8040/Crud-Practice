@@ -16,4 +16,4 @@
 *.log
 .env
 
-appsettings.json
+backend/appsettings.json
