@@ -15,3 +15,5 @@
 # Archivos de configuración locales o logs
 *.log
 .env
+
+appsettings.json
