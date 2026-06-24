@@ -98,8 +98,12 @@ namespace Cruds_Practice.Controllers
             using var trasaction = _db.Database.BeginTransaction();
             try 
             {
+
                 CT_Director? existingDirector = _db.CT_Director.AsNoTracking().FirstOrDefault(d => d.PKDirector == id);
                 if (existingDirector == null) return NotFound(new { message = "Director not found" });
+
+                int moviesRelated = _db.CT_Movie.AsNoTracking().Where(q => q.FKDirector == id).Count();
+                if (moviesRelated > 0) return BadRequest(new { message = $"{existingDirector.Name} has {moviesRelated} movies releated. Delete this movies first. Or contact an Admin." });
 
                 _db.CT_Director.Remove(existingDirector);
                 _db.SaveChanges();

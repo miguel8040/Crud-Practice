@@ -1,24 +1,26 @@
 <ng-container *ngIf="movie">
-    <form #formData="ngForm">
+    <form #formData="ngForm" (ngSubmit)="formData.valid && save()">
         <div class="infoFieldForm" style="width: 100%;">
             <p class="text">Name</p>
             <input name="name" #name="ngModel" class="w-full" type="text" pInputText [(ngModel)]="movie.name" required
                 [maxlength]="100" />
-            <p class="p-error" *ngIf="name.touched && name.invalid">Name is a requierd field</p>
+            <p class="p-error" *ngIf="(name.touched || formData.submitted) && name.invalid">Name is a requierd field</p>
         </div>
         <div class="flex gap-4">
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Gender</p>
                 <input name="gender" #gender="ngModel" class="w-full" type="text" pInputText [(ngModel)]="movie.gender"
                     required [maxlength]="50" />
-                <p class="p-error" *ngIf="gender.touched && gender.invalid">Gender is a requierd field</p>
+                <p class="p-error" *ngIf="(gender.touched || formData.submitted) && gender.invalid">Gender is a requierd
+                    field</p>
             </div>
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Director</p>
                 <p-select class="w-full" appendTo="body" name="fkDirector" #fkDirector="ngModel"
-                    [(ngModel)]="movie.director" [options]="directorServ.allDirectors()" optionLabel="name"
-                    optionValue="pkDirector"></p-select>
-                <p class="p-error" *ngIf="name.touched && name.invalid">Name is a requierd field</p>
+                    [(ngModel)]="movie.fkDirector" [options]="directorServ.allDirectors()" optionLabel="name"
+                    optionValue="pkDirector" required></p-select>
+                <p class="p-error" *ngIf="(fkDirector.touched || formData.submitted) && fkDirector.invalid">Director is
+                    a requierd field</p>
             </div>
         </div>
         <div class="flex gap-4">
@@ -26,13 +28,23 @@
                 <p class="text">Relese Date</p>
                 <p-datepicker appendTo="body" name="releasedate" #releasedate="ngModel"
                     [(ngModel)]="movie.releseDateObj" />
-                <p class="p-error" *ngIf="name.touched && name.invalid">Name is a requierd field</p>
+                <p class="p-error" *ngIf="(releasedate.touched || formData.submitted) && releasedate.invalid">Release
+                    Date is a requierd field</p>
             </div>
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Duration</p>
-                <input class="timeInput" name="duration" #duration="ngModel" [(ngModel)]="movie.duration" type="time" />
-                <p class="p-error" *ngIf="name.touched && name.invalid">Name is a requierd field</p>
+                <input class="timeInput" name="duration" #duration="ngModel" [(ngModel)]="movie.duration" type="time"
+                    step="60" required />
+                <p class="p-error" *ngIf="(duration.touched || formData.submitted) && duration.invalid">Duration is a
+                    requierd field</p>
             </div>
+        </div>
+        <div class="infoFieldForm btnsSection">
+            <p-button [disabled]="loadingSend()" [loading]="loadingDelete()" (click)="delete($event)"
+                *ngIf="movie.pkMovie != 0" icon="pi pi-trash" iconPos="right" label="Delete"
+                severity="danger"></p-button>
+            <p-button [disabled]="loadingDelete()" [loading]="loadingSend()" (click)="save()" icon="pi pi-save"
+                iconPos="right" label="Save" severity="success"></p-button>
         </div>
     </form>
 </ng-container>

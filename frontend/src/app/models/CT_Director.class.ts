@@ -2,7 +2,7 @@ export class CT_Director {
     pkDirector: number = 0;
     name: string = 'No Name';
     nationality: string = "No Nationallity";
-    age: number = 50;
+    age: number = 0;
     active: boolean = true;
 
     constructor(data?: Partial<CT_Director | null | undefined>) {

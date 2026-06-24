@@ -1,11 +1,12 @@
 <ng-container *ngIf="director">
-    <form #formData="ngForm">
+    <form #formData="ngForm" (ngSubmit)="formData.valid && save()">
         <div class="flex gap-4">
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Name</p>
                 <input name="name" #name="ngModel" class="w-full" type="text" pInputText [(ngModel)]="director.name"
                     required [maxlength]="200" />
-                <p class="p-error" *ngIf="name.touched && name.invalid">Name is a requierd field</p>
+                <p class="p-error" *ngIf="(name.touched || formData.submitted) && name.invalid">Name is a requierd field
+                </p>
             </div>
             <div class="infoFieldForm" style="width: auto;">
                 <p class="text">Active</p>
@@ -17,14 +18,16 @@
                 <p class="text">Nationality</p>
                 <input name="nationality" #nationality="ngModel" class="w-full" type="text" pInputText
                     [(ngModel)]="director.nationality" required [maxlength]="100" requi />
-                <p class="p-error" *ngIf="nationality.touched && nationality.invalid">Nationality is a requierd
+                <p class="p-error" *ngIf="(nationality.touched || formData.submitted) && nationality.invalid">
+                    Nationality is a requierd
                     field</p>
             </div>
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Age</p>
                 <p-inputnumber name="age" #age="ngModel" class="w-full" [(ngModel)]="director.age" [min]="1" [max]="200"
                     required />
-                <p class="p-error" *ngIf="age.touched && age.invalid">Age is a requierd field</p>
+                <p class="p-error" *ngIf="(age.touched || formData.submitted) && age.invalid">Age is a requierd field
+                </p>
             </div>
 
         </div>

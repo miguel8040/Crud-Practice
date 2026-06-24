@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { CT_movie } from '../../models/CT_Movie.class';
+import { CT_movie, DTO_Movie } from '../../models/CT_Movie.class';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -41,9 +41,9 @@ export default class Movies {
 
 
   formVisible: boolean = false;
-  movieToUpdate: CT_movie | null = null;
-  movieUpdateClick(movie: CT_movie | null) {
-    this.movieToUpdate = movie ? structuredClone(movie) : new CT_movie().createNew();
+  movieToUpdate: DTO_Movie | null = null;
+  movieUpdateClick(movie: DTO_Movie | null) {
+    this.movieToUpdate = movie ? structuredClone(movie) : new DTO_Movie().createNew();
     this.formVisible = true;
   }
 

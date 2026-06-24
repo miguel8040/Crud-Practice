@@ -32,7 +32,7 @@
                 <th>
                     <div class="flex items-center justify-between">
                         Gender
-                        <p-columnFilter field="nationality" matchMode="in" display="menu" [showMatchModes]="false"
+                        <p-columnFilter field="gender" matchMode="in" display="menu" [showMatchModes]="false"
                             [showOperator]="false" [showAddButton]="false">
                             <ng-template #filter let-value let-filter="filterCallback">
                                 <p-multiselect [(ngModel)]="genderSelection" [options]="movieServ.genders()"

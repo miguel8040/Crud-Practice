@@ -53,4 +53,66 @@ export class MovieService {
       console.error('Error on getting all users', error);
     })
   }
+
+  //#region  New ----------
+  post(movie: DTO_Movie): Promise<{ message: string, status: boolean, data: CT_movie | null }> {
+    movie.releasedate = movie.releseDateObj.toISOString().split('T')[0];
+    return new Promise<{ message: string, status: boolean, data: CT_movie | null }>((resolve) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Accept': '*/*'
+        }),
+      };
+      this.http.post<{ message: string, data: CT_movie | null }>(`${this.urlApi}`, movie, httpOptions).subscribe(res => {
+        if (res.data) this.getAll();
+        resolve({ status: true, message: 'Ok', data: res.data })
+      }, error => {
+        let messageError = (error.error) ? error.error.message : 'Server error, please contact technical support.';
+        resolve({ status: false, message: messageError, data: null });
+        console.error('Error to save new movie')
+      })
+    })
+  }
+  //#endregion
+
+  //#region post New ----------
+  put(movie: DTO_Movie): Promise<{ message: string, status: boolean, data: CT_movie | null }> {
+    movie.releasedate = movie.releseDateObj.toISOString().split('T')[0];
+    return new Promise<{ message: string, status: boolean, data: CT_movie | null }>((resolve) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Accept': '*/*'
+        }),
+      };
+      this.http.put<{ message: string, data: CT_movie | null }>(`${this.urlApi}/${movie.pkMovie}`, movie, httpOptions).subscribe(res => {
+        if (res.data) this.getAll();
+        resolve({ status: true, message: 'Ok', data: res.data })
+      }, error => {
+        let messageError = (error.error) ? error.error.message : 'Server error, please contact technical support.';
+        resolve({ status: false, message: messageError, data: null });
+        console.error('Error to update movie')
+      })
+    })
+  }
+  //#endregion
+
+  //#region   Delete -----
+  delete(pkMovie: number): Promise<{ message: string, status: boolean, data: CT_movie | null }> {
+    return new Promise<{ message: string, status: boolean, data: CT_movie | null }>((resolve) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Accept': '*/*'
+        }),
+      };
+      this.http.delete<{ message: string, data: CT_movie | null }>(`${this.urlApi}/${pkMovie}`, httpOptions).subscribe(res => {
+        this.getAll();
+        resolve({ status: true, message: 'Ok', data: res.data })
+      }, error => {
+        let messageError = (error.error) ? error.error.message : 'Server error, please contact technical support.';
+        resolve({ status: false, message: messageError, data: null });
+        console.error('Error to delete dierctor')
+      })
+    })
+  }
+  //#endregion
 }

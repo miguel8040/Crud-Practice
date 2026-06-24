@@ -2,7 +2,7 @@ import { CT_Director } from "./CT_Director.class";
 
 export class CT_movie {
     pkMovie: number = 0;
-    fkDirector: number = 0;
+    fkDirector: number | null = null;
     name: string = "No Name";
     releasedate: string = '';
     duration: string = "";

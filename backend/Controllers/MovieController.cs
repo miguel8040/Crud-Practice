@@ -92,10 +92,15 @@ namespace Cruds_Practice.Controllers
             using var transaction = _db.Database.BeginTransaction();
             try
             {
-                bool found = await _db.CT_Movie.AnyAsync(q => q.PKMovie == movie.PKMovie);
-                if (!found) return NotFound(new { message = $"Movie {movie.Name} was not found. please check it" });
+                CT_Movie? found = await _db.CT_Movie.FirstOrDefaultAsync(q => q.PKMovie == movie.PKMovie);
+                if (found == null) return NotFound(new { message = $"Movie {movie.Name} was not found. please check it" });
 
-                _db.CT_Movie.Update(movie);
+                found.FKDirector = movie.FKDirector;
+                found.Name = movie.Name;
+                found.Releasedate = movie.Releasedate;
+                found.Duration = movie.Duration;
+                found.Gender = movie.Gender;
+                _db.CT_Movie.Update(found);
                 await _db.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -120,6 +125,7 @@ namespace Cruds_Practice.Controllers
 
                 _db.CT_Movie.Remove(found);
                 await _db.SaveChangesAsync();
+                await trasaction.CommitAsync();
 
                 return Ok(new {message = "Mvoie has been deleted succesfully"});
             }

@@ -93,7 +93,7 @@ export class DirectorForm {
         if (!this.director) return;
         this.loadingDelete.set(true);
         this.directorServ.delete(this.director.pkDirector).then(q => {
-          this.loadingDelete.set(true);
+          this.loadingDelete.set(false);
           if (q.status) {
             this.messageService.add({ severity: 'success', summary: 'Delete Success', detail: 'Director has been deleted successfully' });
             this.onComplete.emit();
