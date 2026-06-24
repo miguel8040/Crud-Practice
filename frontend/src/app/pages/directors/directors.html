@@ -1,4 +1,4 @@
-<h2 class="titleTable">Directos Crud</h2>
+<h2 class="titleTable">Directors Crud</h2>
 
 <div class="tableContainer">
     <p-table #dt1 [value]="directorServ.allDirectors()" [paginator]="true" [rows]="10"
@@ -23,7 +23,7 @@
         </ng-template>
 
         <ng-template #header>
-            @if(!directorServ.loadingDirectors()){
+
             <tr>
                 <th pSortableColumn="pkDirector">PK <p-sortIcon field="pkDirector" /></th>
                 <th>
@@ -46,16 +46,17 @@
                 </th>
                 <th pSortableColumn="code">Age <p-sortIcon field="age" /></th>
             </tr>
-            }
         </ng-template>
 
         <ng-template #body let-director>
+            @if(!directorServ.loadingDirectors()){
             <tr (click)="directorUpdateClick(director)">
                 <td>{{ director.pkDirector }}</td>
                 <td>{{ director.name }}</td>
                 <td>{{ director.nationality }}</td>
                 <td>{{ director.age }}</td>
             </tr>
+            }
         </ng-template>
 
         <ng-template #footer>

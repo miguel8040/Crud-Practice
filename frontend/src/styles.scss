@@ -19,9 +19,19 @@ body {
     width: 100% !important;
 }
 
+.p-error {
+    color: rgb(180, 13, 13);
+    font-size: 70%;
+    padding: 0 0.2rem;
+    overflow: hidden;
+    animation: appearError 0.8s ease forwards;
+    margin: 0.2rem 0;
+}
+
 .flex {
     width: 100%;
     display: flex;
+    align-items: center;
 
     &.gap-1 {
         gap: 0.2rem;

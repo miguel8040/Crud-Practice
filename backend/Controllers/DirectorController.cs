@@ -82,7 +82,7 @@ namespace Cruds_Practice.Controllers
                 _db.CT_Director.Update(director);
                 await _db.SaveChangesAsync();
                 await transaction.CommitAsync();
-                return Ok(new { message = $"Director : {director.Name} has been updated successfully" });
+                return Ok(new { message = $"Director : {director.Name} has been updated successfully", data = director });
             }
             catch(Exception ex) 
             {

@@ -51,12 +51,20 @@ export class DirectorForm {
       return;
     }
     if (this.director && this.director.pkDirector) {
-      //TODO
+      this.directorServ.put(this.director).then(q => {
+        this.loadingSend.set(false);
+        if (q.status) {
+          this.messageService.add({ severity: 'success', summary: 'Succes Update', detail: 'Director has been udpate successfully' });
+          this.onComplete.emit();
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: q.message });
+        }
+      })
     } else if (this.director) {
       this.directorServ.post(this.director).then(q => {
-        console.log('HOLAS')
+        this.loadingSend.set(false);
         if (q.status) {
-          this.messageService.add({ severity: 'success', summary: 'Succes Updaload', detail: 'Director has been udpate successfully' });
+          this.messageService.add({ severity: 'success', summary: 'Succes Upload', detail: 'Director has been added successfully' });
           this.onComplete.emit();
         } else {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: q.message });
@@ -66,7 +74,7 @@ export class DirectorForm {
   }
 
   //#region -------- Delete Building ----------
-  loadingDelete: boolean = false;
+  loadingDelete = signal<boolean>(false);
   delete(event: Event) {
     this.confirmationService.confirm({
       target: event.currentTarget as EventTarget,
@@ -82,7 +90,17 @@ export class DirectorForm {
         severity: 'danger'
       },
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
+        if (!this.director) return;
+        this.loadingDelete.set(true);
+        this.directorServ.delete(this.director.pkDirector).then(q => {
+          this.loadingDelete.set(true);
+          if (q.status) {
+            this.messageService.add({ severity: 'success', summary: 'Delete Success', detail: 'Director has been deleted successfully' });
+            this.onComplete.emit();
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: q.message });
+          }
+        })
       },
     });
   }

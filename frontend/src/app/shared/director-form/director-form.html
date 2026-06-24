@@ -16,24 +16,23 @@
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Nationality</p>
                 <input name="nationality" #nationality="ngModel" class="w-full" type="text" pInputText
-                    [(ngModel)]="director.nationality" required [maxlength]="100" />
-                <p class="p-error" *ngIf="nationality.touched && nationality.invalid">Director Nationality is a requierd
+                    [(ngModel)]="director.nationality" required [maxlength]="100" requi />
+                <p class="p-error" *ngIf="nationality.touched && nationality.invalid">Nationality is a requierd
                     field</p>
             </div>
             <div class="infoFieldForm" style="width: 100%;">
                 <p class="text">Age</p>
-                <p-inputnumber name="age" #age="ngModel" class="w-full" [(ngModel)]="director.age" [min]="1"
-                    [max]="200" />
-                <p class="p-error" *ngIf="age.touched && age.invalid">Director age is a requierd
-                    field</p>
+                <p-inputnumber name="age" #age="ngModel" class="w-full" [(ngModel)]="director.age" [min]="1" [max]="200"
+                    required />
+                <p class="p-error" *ngIf="age.touched && age.invalid">Age is a requierd field</p>
             </div>
 
         </div>
         <div class="infoFieldForm btnsSection">
-            <p-button [disabled]="loadingSend()" [loading]="loadingDelete" (click)="delete()"
+            <p-button [disabled]="loadingSend()" [loading]="loadingDelete()" (click)="delete($event)"
                 *ngIf="director.pkDirector != 0" icon="pi pi-trash" iconPos="right" label="Delete"
                 severity="danger"></p-button>
-            <p-button [disabled]="loadingDelete" [loading]="loadingSend()" (click)="save()" icon="pi pi-save"
+            <p-button [disabled]="loadingDelete()" [loading]="loadingSend()" (click)="save()" icon="pi pi-save"
                 iconPos="right" label="Save" severity="success"></p-button>
         </div>
     </form>

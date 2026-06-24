@@ -58,5 +58,43 @@ export class DirectorService {
     })
   }
   //#endregion
+  //#region post New ----------
+  put(director: CT_Director): Promise<{ message: string, status: boolean, data: CT_Director | null }> {
+    return new Promise<{ message: string, status: boolean, data: CT_Director | null }>((resolve) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Accept': '*/*'
+        }),
+      };
+      this.http.put<{ message: string, data: CT_Director | null }>(`${this.urlApi}/${director.pkDirector}`, director, httpOptions).subscribe(res => {
+        if (res.data) this.getAll();
+        resolve({ status: true, message: 'Ok', data: res.data })
+      }, error => {
+        let messageError = (error.error) ? error.error.message : 'Server error, please contact technical support.';
+        resolve({ status: false, message: messageError, data: null });
+        console.error('Error to update dierctor')
+      })
+    })
+  }
+  //#endregion
 
+  //#region   Delete -----
+  delete(pkDirector: number): Promise<{ message: string, status: boolean, data: CT_Director | null }> {
+    return new Promise<{ message: string, status: boolean, data: CT_Director | null }>((resolve) => {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Accept': '*/*'
+        }),
+      };
+      this.http.delete<{ message: string, data: CT_Director | null }>(`${this.urlApi}/${pkDirector}`, httpOptions).subscribe(res => {
+        this.getAll();
+        resolve({ status: true, message: 'Ok', data: res.data })
+      }, error => {
+        let messageError = (error.error) ? error.error.message : 'Server error, please contact technical support.';
+        resolve({ status: false, message: messageError, data: null });
+        console.error('Error to delete dierctor')
+      })
+    })
+  }
+  //#endregion
 }
