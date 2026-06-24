@@ -1,0 +1,38 @@
+.fullContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--background-color);
+
+  header {
+    width: 100%;
+    box-sizing: border-box;
+    height: 4rem;
+    padding: var(--border-layout);
+  }
+
+  .bodyContainer {
+    width: 100%;
+    height: 100%;
+    padding: var(--border-layout);
+
+    body {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      background-color: var(--surface-color);
+      overflow-x: auto;
+      overflow-y: auto;
+    }
+  }
+
+  footer {
+    width: 100%;
+    height: 4rem;
+    padding: var(--border-layout);
+  }
+}

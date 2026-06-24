@@ -10,6 +10,7 @@ namespace Cruds_Practice.Data
         }
 
         public DbSet<CT_Director> CT_Director { get; set; }
+        public DbSet<CT_Movie> CT_Movie { get; set; }
 
     }
 }

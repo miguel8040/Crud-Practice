@@ -1,0 +1,40 @@
+<ng-container *ngIf="director">
+    <form #formData="ngForm">
+        <div class="flex gap-4">
+            <div class="infoFieldForm" style="width: 100%;">
+                <p class="text">Name</p>
+                <input name="name" #name="ngModel" class="w-full" type="text" pInputText [(ngModel)]="director.name"
+                    required [maxlength]="200" />
+                <p class="p-error" *ngIf="name.touched && name.invalid">Name is a requierd field</p>
+            </div>
+            <div class="infoFieldForm" style="width: auto;">
+                <p class="text">Active</p>
+                <p-toggleswitch name="enable" #enable="ngModel" [(ngModel)]="director.active" />
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <div class="infoFieldForm" style="width: 100%;">
+                <p class="text">Nationality</p>
+                <input name="nationality" #nationality="ngModel" class="w-full" type="text" pInputText
+                    [(ngModel)]="director.nationality" required [maxlength]="100" />
+                <p class="p-error" *ngIf="nationality.touched && nationality.invalid">Director Nationality is a requierd
+                    field</p>
+            </div>
+            <div class="infoFieldForm" style="width: 100%;">
+                <p class="text">Age</p>
+                <p-inputnumber name="age" #age="ngModel" class="w-full" [(ngModel)]="director.age" [min]="1"
+                    [max]="200" />
+                <p class="p-error" *ngIf="age.touched && age.invalid">Director age is a requierd
+                    field</p>
+            </div>
+
+        </div>
+        <div class="infoFieldForm btnsSection">
+            <p-button [disabled]="loadingSend()" [loading]="loadingDelete" (click)="delete()"
+                *ngIf="director.pkDirector != 0" icon="pi pi-trash" iconPos="right" label="Delete"
+                severity="danger"></p-button>
+            <p-button [disabled]="loadingDelete" [loading]="loadingSend()" (click)="save()" icon="pi pi-save"
+                iconPos="right" label="Save" severity="success"></p-button>
+        </div>
+    </form>
+</ng-container>

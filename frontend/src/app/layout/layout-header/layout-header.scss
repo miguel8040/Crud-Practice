@@ -1,0 +1,51 @@
+.header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--surface-color);
+  border-radius: 0.5rem;
+
+  a {
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    color: var(--text-color);
+
+    &.activeLink {
+      background-color: var(--primary-color);
+      color: #fff;
+
+      &:hover {
+        &:after {
+          width: 0;
+        }
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      background-color: var(--primary-color);
+      transition: all 0.5s ease;
+    }
+
+    &:hover {
+      &:after {
+        width: 100%;
+      }
+    }
+  }
+
+}
